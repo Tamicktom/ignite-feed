@@ -7,7 +7,7 @@ export function Post() {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src="https://github.com/tamicktom;png" alt="" />
+          <img className={styles.avatar} src="https://github.com/tamicktom.png" alt="" />
           <div>
             <strong>Tamicktom</strong>
             <span>Web Developer</span>
@@ -26,6 +26,18 @@ export function Post() {
         <p>Fala galera</p>
         <p>Hoje vamos falar sobre...</p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea
+          placeholder="Deixe um comentário"
+        />
+
+
+        <footer>
+          <button type="submit">Comentar</button>
+        </footer>
+      </form>
     </article>
   );
 }
