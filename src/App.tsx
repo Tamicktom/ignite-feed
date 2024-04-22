@@ -4,6 +4,7 @@ import styles from "./App.module.css";
 
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
+import { Post } from "./components/Post";
 
 export default function App() {
   return (
@@ -14,26 +15,9 @@ export default function App() {
         <Sidebar />
 
         <main>
-          <Post
-            title="Hello, World!"
-            content="This is my first post!"
-          />
+          <Post />
         </main>
       </div>
     </div>
   )
-}
-
-type PostProps = {
-  title: string;
-  content: string;
-}
-
-function Post(props: PostProps) {
-  return (
-    <div>
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
-    </div>
-  );
 }
