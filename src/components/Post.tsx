@@ -56,6 +56,14 @@ export function Post(props: PostProps) {
     }
   }
 
+  function deleteComment(index: number) {
+    setComments((prevComments) => {
+      const newComments = [...prevComments];
+      newComments.splice(index, 1);
+      return newComments;
+    });
+  }
+
   return (
     <article className={styles.post}>
       <header>
@@ -105,7 +113,14 @@ export function Post(props: PostProps) {
         {
           comments.map((comment, index) => {
             const key = `comment-${index}`;
-            return (<Comment key={key} content={comment} />);
+            return (
+              <Comment
+                key={key}
+                id={index}
+                content={comment}
+                onDeleteComment={deleteComment}
+              />
+            );
           })
         }
       </div>
