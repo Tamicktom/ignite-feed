@@ -25,6 +25,7 @@ export type PostProps = {
 }
 
 export function Post(props: PostProps) {
+  const [isNewCommentEmpty, setIsNewCommentEmpty] = useState<boolean>(false);
   const [comments, setComments] = useState<string[]>([
     "Primeiro comentário",
     "Segundo comentário",
@@ -40,6 +41,13 @@ export function Post(props: PostProps) {
     addSuffix: true
   });
 
+  function handleCreateNewCommentChange(event: FormEvent) {
+    if (event.target instanceof HTMLTextAreaElement) {
+      event.target.setCustomValidity("");
+      setIsNewCommentEmpty(event.target.checkValidity());
+    }
+  }
+
   function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
 
@@ -53,6 +61,13 @@ export function Post(props: PostProps) {
         setComments((prevComments) => [...prevComments, comment]);
         event.currentTarget.reset();
       }
+    }
+  }
+
+  function handleNewCommentInvalid(event: FormEvent) {
+    if (event.target instanceof HTMLTextAreaElement) {
+      event.target.setCustomValidity("O comentário não pode estar vazio");
+      setIsNewCommentEmpty(false);
     }
   }
 
@@ -102,10 +117,18 @@ export function Post(props: PostProps) {
           id="comment"
           name="comment"
           placeholder="Deixe um comentário"
+          required
+          onInvalid={handleNewCommentInvalid}
+          onInput={handleCreateNewCommentChange}
         />
 
         <footer>
-          <button type="submit">Comentar</button>
+          <button
+            type="submit"
+            disabled={!isNewCommentEmpty}
+          >
+            Comentar
+          </button>
         </footer>
       </form>
 
